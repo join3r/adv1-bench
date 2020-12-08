@@ -1,0 +1,25 @@
+[package]
+name = "adv1"
+version = "0.1.0"
+authors = ["join3r"]
+edition = "2018"
+license = "CC-BY-NC-ND-4.0"
+
+[dependencies]
+criterion = "0.3"
+rand = "0.7"
+
+[profile.release]
+opt-level = "z"
+debug = false
+rpath = false
+lto = true
+debug-assertions = false
+codegen-units = 1
+panic = "abort"
+incremental = false
+overflow-checks = true
+
+[[bench]]
+name = "adv1"
+harness = false
