@@ -1,6 +1,4 @@
-use std::time::Duration;
-
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
+use criterion::{criterion_group, criterion_main, Criterion};
 use rand::{
     distributions::Uniform,
     prelude::{SliceRandom, ThreadRng},
