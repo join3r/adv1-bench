@@ -35,6 +35,28 @@ fn feri(input: &str) -> u64 {
     panic!()
 }
 
+fn join3r(input: &str) -> u64 {
+    let mut input: Vec<_> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
+    while let Some(i) = input.pop() {
+        for j in input.iter() {
+            if i + j == 2020 {
+                return i * j;
+            }
+        }
+    }
+    panic!();
+}
+
+fn osiris(input: &str) -> u64 {
+    let mut input: Vec<_> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
+    while let Some(i) = input.pop() {
+        if input.contains(&(2020-i)) {
+            return i * (2020 - i)
+        }
+    }
+    panic!();
+}
+
 fn bench_fibs(c: &mut Criterion) {
     let mut group = c.benchmark_group("aoc-1");
 
@@ -45,6 +67,8 @@ fn bench_fibs(c: &mut Criterion) {
     let input = sorted.join("\n");
     group.bench_function("Bachi", |b| b.iter(|| bachi(&input)));
     group.bench_function("Feri", |b| b.iter(|| feri(&input)));
+    group.bench_function("join3r", |b| b.iter(|| join3r(&input)));
+    group.bench_function("osiris", |b| b.iter(|| osiris(&input)));
 
     group.finish();
 }
