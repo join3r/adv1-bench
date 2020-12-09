@@ -47,6 +47,17 @@ fn join3r(input: &str) -> u64 {
     panic!();
 }
 
+fn osiris_fast(input: &str) -> u64 {
+    for line in input.lines() {
+        let search: u64 = 2020 - line.parse::<u64>().unwrap();
+        let ss = search.to_string();
+        if input.contains(&ss) {
+            return search * (2020 - search)
+        }
+    }
+    panic!()
+}
+
 fn osiris(input: &str) -> u64 {
     let mut input: Vec<_> = input.lines().map(|l| l.parse::<u64>().unwrap()).collect();
     while let Some(i) = input.pop() {
@@ -65,6 +76,7 @@ fn bench_fibs(c: &mut Criterion) {
 
     sorted.shuffle(&mut rng);
     let input = sorted.join("\n");
+    group.bench_function("osiris_fast", |b| b.iter(|| osiris_fast(&input)));
     group.bench_function("Bachi", |b| b.iter(|| bachi(&input)));
     group.bench_function("Feri", |b| b.iter(|| feri(&input)));
     group.bench_function("join3r", |b| b.iter(|| join3r(&input)));
